@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import type { ReactNode } from 'react';
 
+import Navbar from './Navbar';
+
 type DefaultLayoutProps = { children: ReactNode };
 
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
@@ -12,6 +14,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
       </Head>
 
       <main className="h-screen">{children}</main>
+      <Navbar />
     </>
   );
 };

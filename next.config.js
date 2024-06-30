@@ -32,4 +32,7 @@ module.exports = getConfig({
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ['images.unsplash.com'],
+  },
 });
