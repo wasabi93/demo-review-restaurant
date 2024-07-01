@@ -42,7 +42,7 @@
     "prisma-json-types-generator": "^3.0.4",
     "react": "^19.0.0-rc-58af67a8f8-20240628",
     "react-dom": "^19.0.0-rc-58af67a8f8-20240628",
-    "superjson": "^1.12.4",
+    "superjson": "^2.2.1",
     "use-debounce": "^10.0.1",
     "zod": "^3.0.0"
   },
