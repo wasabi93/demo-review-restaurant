@@ -12,42 +12,30 @@
   - ✅ Linting
 - 🔐 Validates your env vars on build and start
 
-## Setup
 
-```bash
-pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
-cd trpc-prisma-starter
-pnpm
-pnpm dx
-```
-
-### Requirements
+## Requirements
 
 - Node >= 18.0.0
-- Postgres
+- Postgre
 
-## Development
 
-### Start project
+## Setup
 
-```bash
-pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
-cd trpc-prisma-starter
-pnpm
-pnpm dx
-```
+- download DBngin: https://dbngin.com/download
 
-### Commands
+- create local PostgreSQL: <img width="447" alt="Screenshot 2024-07-01 at 09 20 09" src="https://github.com/wasabi93/demo-review-restaurant/assets/85331765/c525f9d9-209d-40c6-8190-d32f241a9933">
 
-```bash
-pnpm build      # runs `prisma generate` + `prisma migrate` + `next build`
-pnpm db-reset   # resets local db
-pnpm dev        # starts next.js
-pnpm dx         # starts postgres db + runs migrations + seeds + starts next.js
-pnpm test-dev   # runs e2e tests on dev
-pnpm test-start # runs e2e + unit tests
-pnpm test-unit  # runs normal Vitest unit tests
-pnpm test-e2e   # runs e2e tests
-```
+- start DB: <img width="407" alt="Screenshot 2024-07-01 at 09 25 55" src="https://github.com/wasabi93/demo-review-restaurant/assets/85331765/47cab83b-af7f-4ea0-aef4-08323462bff5">
+
+
+## Command
+
+- yarn install
+- yarn dev or yarn dx:next
+///
+- npx prisma studio
+
+
+///
 
 generated from trpc/examples-next-prisma-starter
