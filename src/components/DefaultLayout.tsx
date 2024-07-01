@@ -9,8 +9,9 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
     <>
       <Head>
-        <title>Prisma Starter</title>
+        <title>Restaurants</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
       </Head>
 
       <main className="h-screen">{children}</main>
