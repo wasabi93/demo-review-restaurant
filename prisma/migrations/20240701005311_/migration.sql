@@ -1,9 +1,12 @@
+-- CreateEnum
+CREATE TYPE "STORE_CATEGORY" AS ENUM ('SUSHI', 'UNAGI', 'TEMPURA', 'TONKATSU', 'YAKITORI', 'SUKIYAKI', 'SOBA', 'RAMEN', 'YAKISOBA', 'OKONOMIYAKI', 'DONBURI', 'ODEN', 'KAISEKI', 'HAMBAGU', 'TEPPANYAKI', 'CURRY', 'YAKINIKU', 'NABE', 'CAFE', 'IZAKAYA', 'OTHER');
+
 -- CreateTable
 CREATE TABLE "Restaurant" (
     "id" TEXT NOT NULL,
     "rating" DOUBLE PRECISION NOT NULL,
     "rating_count" INTEGER NOT NULL,
-    "category" TEXT NOT NULL,
+    "category" "STORE_CATEGORY" NOT NULL,
     "city" TEXT NOT NULL,
     "desc" TEXT NOT NULL,
     "images" TEXT[],

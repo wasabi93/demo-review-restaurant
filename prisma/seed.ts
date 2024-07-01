@@ -213,8 +213,10 @@ const iniRestaurants: Prisma.RestaurantCreateInput[] = [
 async function main() {
   await prisma.$transaction(
     iniRestaurants.map((restaurant) =>
-      prisma.restaurant.create({
-        data: restaurant,
+      prisma.restaurant.upsert({
+        where: { id: restaurant.id },
+        update: {},
+        create: restaurant,
       }),
     ),
   );

@@ -15,7 +15,7 @@ import { prisma } from '~/server/prisma';
  */
 
 export const restaurantRouter = router({
-  list: publicProcedure
+  getRestaurants: publicProcedure
     .input(
       z.object({
         limit: z.number().min(1).max(100).nullish(),
@@ -51,6 +51,7 @@ export const restaurantRouter = router({
       }
 
       let nextCursor: typeof cursor | undefined = undefined;
+      
       if (restaurants.length > limit) {
         // Remove the last item and use it as next cursor
 
@@ -64,7 +65,8 @@ export const restaurantRouter = router({
         nextCursor,
       };
     }),
-  bySearch: publicProcedure
+
+  getRestaurantsBySearchInput: publicProcedure
     .input(
       z.object({
         searchInput: z.string().nullish(),
@@ -80,20 +82,10 @@ export const restaurantRouter = router({
       if (searchInput) {
         restaurants = await prisma.restaurant.findMany({
           where: {
-            OR: [
-              {
-                name: {
-                  contains: searchInput,
-                  mode: 'insensitive',
-                },
-              },
-              {
-                category: {
-                  contains: searchInput,
-                  mode: 'insensitive',
-                },
-              },
-            ],
+            name: {
+              contains: searchInput,
+              mode: 'insensitive',
+            },
           },
           take: limit + 1,
           cursor: cursor
@@ -113,17 +105,17 @@ export const restaurantRouter = router({
             : undefined,
         });
       }
+
       if (!restaurants) {
         throw new TRPCError({
           code: 'NOT_FOUND',
           message: `No restaurant with name: '${name}'`,
         });
       }
-      let nextCursor: typeof cursor | undefined = undefined;
-      if (restaurants.length > limit) {
-        // Remove the last item and use it as next cursor
 
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      let nextCursor: typeof cursor | undefined = undefined;
+
+      if (restaurants.length > limit) {
         const nextItem = restaurants.pop()!;
         nextCursor = nextItem.id;
       }
@@ -133,7 +125,8 @@ export const restaurantRouter = router({
         nextCursor,
       };
     }),
-  byId: publicProcedure
+
+  getRestaurantById: publicProcedure
     .input(
       z.object({
         id: z.string(),
@@ -144,15 +137,18 @@ export const restaurantRouter = router({
       const restaurant = await prisma.restaurant.findUnique({
         where: { id },
       });
+
       if (!restaurant) {
         throw new TRPCError({
           code: 'NOT_FOUND',
           message: `No restaurant with id: '${id}'`,
         });
       }
+
       return restaurant;
     }),
-  updateFavorite: publicProcedure
+
+  addFavorite: publicProcedure
     .input(
       z.object({
         id: z.string(),
@@ -167,7 +163,7 @@ export const restaurantRouter = router({
           isFavorite,
         },
       });
-      
+
       if (!restaurant) {
         throw new TRPCError({
           code: 'NOT_FOUND',

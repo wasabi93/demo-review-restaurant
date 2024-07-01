@@ -9,7 +9,7 @@
     "dx:next": "run-s migrate-dev db-seed && next dev",
     "dx:prisma-studio": "pnpm prisma-studio",
     "dx": "run-p dx:* --print-label",
-    "dev": "next dev",
+    "dev": "pnpm dx:next",
     "prebuild": "run-s generate migrate",
     "build": "next build",
     "start": "next start",
@@ -20,7 +20,7 @@
     "test-unit": "vitest",
     "test-e2e": "playwright test",
     "test-start": "run-s test-unit test-e2e",
-    "postinstall": "pnpm generate && yarn migrate"
+    "postinstall": "pnpm generate"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -43,6 +43,7 @@
     "react": "^19.0.0-rc-58af67a8f8-20240628",
     "react-dom": "^19.0.0-rc-58af67a8f8-20240628",
     "superjson": "^1.12.4",
+    "use-debounce": "^10.0.1",
     "zod": "^3.0.0"
   },
   "devDependencies": {

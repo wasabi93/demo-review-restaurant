@@ -18,7 +18,7 @@ export const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
 
   const { text } = featured as { text: string };
 
-  const updateFavoriteBtn = trpc.restaurant.updateFavorite.useMutation();
+  const updateFavoriteBtn = trpc.restaurant.addFavorite.useMutation();
 
   const [currentFavorite, setCurrentFavorite] = useState(isFavorite);
 
@@ -45,6 +45,7 @@ export const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
             />
           </div>
         </Link>
+
         <div onClick={handlePressFavorite}>
           <div className="absolute top-0 right-0 bg-white/25 px-2 py-2 text-white mt-3 mr-3 rounded-full">
             <svg
@@ -92,6 +93,7 @@ export const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
           </svg>
           <p className="ml-1 text-orange-light text-xs/[18px]">{text}</p>
         </div>
+
         <div className="flex flex-row items-center justify-between">
           <p className="font-medium text-base truncate">{name}</p>
           <div className="flex flex-row items-center ml-1">
@@ -129,6 +131,7 @@ export const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
             })`}</p>
           </div>
         </div>
+
         <p className="text-gray-500 text-sm">{`${desc} · ${price_range}만원`}</p>
       </Link>
     </div>

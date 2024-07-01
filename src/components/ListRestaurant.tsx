@@ -5,14 +5,17 @@ import { trpc } from '../utils/trpc';
 import { memo, useState } from 'react';
 import { SearchBar } from './SearchBar';
 import { RestaurantCard } from './RestaurantCard';
+import { useDebouncedCallback } from 'use-debounce';
 
 function ListRestaurant(props: { searchInput: string }) {
   const { searchInput } = props;
 
-  const restaurantsQuery = trpc.restaurant.bySearch.useQuery({
-    searchInput: searchInput,
-    limit: 10,
-  });
+  const restaurantsQuery = trpc.restaurant.getRestaurantsBySearchInput.useQuery(
+    {
+      searchInput: searchInput,
+      limit: 10,
+    },
+  );
 
   const ListRestaurant = restaurantsQuery.data?.items ?? [];
 
@@ -48,15 +51,18 @@ function ListRestaurant(props: { searchInput: string }) {
 const RestaurantListViewPage: NextPageWithLayout = () => {
   const [searchInput, setSearchInput] = useState<string>('');
 
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value);
-  };
+  const handleChangeInput = useDebouncedCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchInput(e.target.value);
+    },
+    1000,
+  );
 
   return (
     <>
       <SearchBar handleChangeInput={handleChangeInput} />
       <ListRestaurant searchInput={searchInput} />
-      <div className="h-20"></div>
+      <div className="h-20" />
     </>
   );
 };

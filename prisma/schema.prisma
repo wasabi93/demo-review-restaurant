@@ -17,11 +17,35 @@ generator json {
   // (./ -> relative to schema, or an importable path to require() it)
 }
 
+enum STORE_CATEGORY {
+  SUSHI
+  UNAGI
+  TEMPURA
+  TONKATSU
+  YAKITORI
+  SUKIYAKI
+  SOBA
+  RAMEN
+  YAKISOBA
+  OKONOMIYAKI
+  DONBURI
+  ODEN
+  KAISEKI
+  HAMBAGU
+  TEPPANYAKI
+  CURRY
+  YAKINIKU
+  NABE
+  CAFE
+  IZAKAYA
+  OTHER
+}
+
 model Restaurant {
   id           String         @id @unique @default(uuid())
   rating       Float
   rating_count Int
-  category     String
+  category     STORE_CATEGORY
   city         String
   desc         String
   images       String[]

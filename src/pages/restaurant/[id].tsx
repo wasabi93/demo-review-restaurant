@@ -4,10 +4,11 @@ import { useRouter } from 'next/router';
 import type { NextPageWithLayout } from '../../pages/_app';
 import { RouterOutput, trpc } from '../../utils/trpc';
 
-type RestaurantByNameOutput = RouterOutput['restaurant']['byId'];
+type RestaurantByNameOutput = RouterOutput['restaurant']['getRestaurantById'];
 
 function RestaurantItem(props: { restaurant: RestaurantByNameOutput }) {
   const { restaurant } = props;
+
   return (
     <div className="flex flex-col justify-center h-full px-8 ">
       <h1 className="text-4xl font-bold">{restaurant.name}</h1>
@@ -22,7 +23,7 @@ function RestaurantItem(props: { restaurant: RestaurantByNameOutput }) {
 
 const RestaurantViewPage: NextPageWithLayout = () => {
   const id = useRouter().query.id as string;
-  const restaurantQuery = trpc.restaurant.byId.useQuery({ id });
+  const restaurantQuery = trpc.restaurant.getRestaurantById.useQuery({ id });
 
   if (restaurantQuery.error) {
     return (
@@ -43,7 +44,9 @@ const RestaurantViewPage: NextPageWithLayout = () => {
       </div>
     );
   }
+
   const { data } = restaurantQuery;
+  
   return <RestaurantItem restaurant={data} />;
 };
 
